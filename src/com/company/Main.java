@@ -12,14 +12,18 @@ public class Main {
         Sprog sprog = new Sprog();
 
         while (!   getString(dialog.quit() ).equalsIgnoreCase("q") )  {
-
-
             if(getString("change language ?").equalsIgnoreCase("y")) {
-                dialog = sprog.SkiftSprog(getString("da / eng / swa / esp / fin"));
-
+                StringBuilder sb = new StringBuilder();
+                sprog.getAll().forEach((key,value)
+                        -> sb.append(key)
+                        .append(" = ")
+                        .append(value.getLanguage())
+                        .append("\n"));
+                sb.append("Pick language code");
+                dialog = sprog.SkiftSprog(getString(sb.toString()));
             }
             System.out.println(dialog.selectedLanguage() + " " + dialog.getLanguage());
-
+            System.out.println();
         }
 
 
@@ -29,7 +33,7 @@ public class Main {
 
         Scanner scanner = new Scanner(System.in);
 
-        System.out.print(s + " : ");
+        System.out.print(s + ": ");
 
         return scanner.nextLine();
 
